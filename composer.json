@@ -1,4 +1,13 @@
 {
+    "name": "olegario/page-search-traits",
+    "description": "Library containing specialized pagination and search traits",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Lorraine-Olegario",
+            "email": "lorraineolegario16@gmail.com"
+        }
+    ],
     "autoload": {
         "psr-4": {
             "Olegario\\PageSearchTraits\\": "src/"
