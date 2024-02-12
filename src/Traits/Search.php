@@ -2,33 +2,72 @@
 
 namespace Olegario\PageSearchTraits\Traits;
 
+/**
+ * Trait Search
+ *
+ * This trait provides methods for building SQL queries with search, order by, group by, and join functionalities.
+ */
 trait Search
 {
-    #AND
+    /**
+     * #AND conditions
+     *
+     * @var array $searchFields An array of fields for AND conditions in the search.
+     * @var array $searchValues An array of values corresponding to the AND conditions.
+     * @var array $searchConditions An array of conditions (e.g., '=', '>', '<') for the AND conditions.
+     */
     private $searchFields = [];
     private $searchValues = [];
     private $searchConditions = [];
 
-    #OR
+    /**
+     * #OR conditions
+     *
+     * @var array $searchFieldsOR An array of arrays containing fields for OR conditions in the search.
+     * @var array $searchValuesOR An array of arrays containing values corresponding to the OR conditions.
+     * @var array $searchConditionsOR An array of conditions for the OR conditions.
+     */
     private array $searchFieldsOR = [];
     private array $searchValuesOR = [];
     private array $searchConditionsOR = [];
 
-    #ORDER BY
+
+    /**
+     * #ORDER BY conditions
+     *
+     * @var array $searchFieldOrder An array of fields for ORDER BY conditions.
+     * @var array $sortFieldType An array of sorting types (e.g., ASC, DESC) for the ORDER BY conditions.
+     */
     private array $searchFieldOrder = [];
     private array $sortFieldType;
 
-    #GROUP BY
+    /**
+     * #GROUP BY conditions
+     *
+     * @var array $groupFields An array of fields for GROUP BY conditions.
+     */
     private array $groupFields;
 
-    #join
+    /**
+     * #JOIN conditions
+     *
+     * @var array $searchType An array of join types (e.g., INNER JOIN, LEFT JOIN) for the join conditions.
+     * @var array $searchBanco An array of tables for the join conditions.
+     * @var array $searchSimilarField An array of fields for the join conditions.
+     * @var array $searchSimilarFieldReverse An array of fields for the reverse join conditions.
+     */
     private $searchType = [];
     private $searchBanco = [];
     private $searchSimilarField = [];
     private $searchSimilarFieldReverse = [];
 
 
-    private function sqlSearch()
+    /**
+     * Generate the SQL WHERE clause for AND conditions in the search.
+     *
+     * @return string The SQL WHERE clause for AND conditions.
+     */
+    private function sqlSearch(): string
     {
         if ($this->search) {
             $conditions = [];
@@ -42,7 +81,13 @@ trait Search
         return '';
     }
 
-    private function sqlSearchOr()
+
+    /**
+     * Generate the SQL WHERE clause for OR conditions in the search.
+     *
+     * @return string The SQL WHERE clause for OR conditions.
+     */
+    private function sqlSearchOr(): string
     {
         if ($this->searchOR) {
             $conditions = [];
@@ -60,7 +105,13 @@ trait Search
         return '';
     }
 
-    private function sqlOrderBy()
+
+    /**
+     * Generate the SQL ORDER BY clause for order conditions in the search.
+     *
+     * @return string The SQL ORDER BY clause for order conditions.
+     */
+    private function sqlOrderBy(): string
     {
         if ($this->searchOrder) {
             $conditions = [];
@@ -74,7 +125,13 @@ trait Search
         return '';
     }
 
-    private function sqlGroupBy()
+
+    /**
+     * Generate the SQL GROUP BY clause for group conditions in the search.
+     *
+     * @return string The SQL GROUP BY clause for group conditions.
+     */
+    private function sqlGroupBy(): string
     {
         if ($this->searchFieldGroup) {
             $conditions = [];
@@ -87,7 +144,13 @@ trait Search
         return '';
     }
 
-    private function sqlJoind()
+
+    /**
+     * Generate the SQL JOIN clause for join conditions.
+     *
+     * @return string The SQL JOIN clause for join conditions.
+     */
+    private function sqlJoind(): string
     {
         if ($this->join) {
             $conditions = [];
