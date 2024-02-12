@@ -11,6 +11,10 @@
     "autoload": {
         "psr-4": {
             "Olegario\\PageSearchTraits\\": "src/"
-        }
+        },
+        "files": ["environment.php"]
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^10.5"
     }
 }
