@@ -1,6 +1,6 @@
 # PageSearchTraits
 
-Introducing PHPPageSearchTraits, a library containing specialized pagination and search traits to improve the flexibility and efficiency of data access in PHP projects. Simplify your repository operations with robust functionality and easy integration.
+Introducing PageSearchTraits, a library containing specialized pagination and search traits to improve the flexibility and efficiency of data access in PHP projects. Simplify your repository operations with robust functionality and easy integration.
 
 The class uses Trait to extend its query capabilities. The added methods allow complex queries to be built, taking advantage of concepts such as field mapping and search operators.
 
