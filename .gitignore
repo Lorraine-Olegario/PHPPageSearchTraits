@@ -18,3 +18,8 @@ yarn-error.log
 /.idea
 /.vscode
 testdox.txt
+*.sqlite
+*.sqlite3
+/tests
+/src/examples
+bancoDados.php
