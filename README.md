@@ -65,7 +65,7 @@ $testRepository->searchOR(['number', 'description'], 'like', $searchValue);
 $testRepository->searchOR(['test'], '=', $searchValue);
  ```
  
-Example using sqlSearchOrConditions: search condition to the search query with different values for each field.
+Example using sqlSearchOrConditions: search condition with different values for each field.
 ```bash
 $testRepository->searchORWithValues(
     ['idProcess', 'type', 'documentType'],
