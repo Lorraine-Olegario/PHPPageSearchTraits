@@ -105,6 +105,38 @@ trait Search
         return '';
     }
 
+    /**
+     * Build the SQL WHERE clause for OR conditions in the search.
+     *
+     * @return string The SQL WHERE clause for OR conditions.
+     */
+    private function sqlSearchOrConditions(): string
+    {
+        if (!$this->searchOR || empty($this->searchFieldsOR)) {
+            return '';
+        }
+
+        $conditions = [];
+        foreach ($this->searchFieldsOR as $i => $fields) {
+            foreach ($fields as $field) {
+                $conditions[] = sprintf(
+                    "%s %s '%s'",
+                    $field,
+                    $this->searchConditionsOR[$i],
+                    $this->escapeValue($this->searchValuesOR[$i])
+                );
+            }
+        }
+
+        $where = $this->search === true ? ' AND ' : 'WHERE ';
+        return $where . '(' . implode(" OR ", $conditions) . ')';
+    }
+
+    private function escapeValue(string $value): string
+    {
+        return addslashes($value); // Use um método de escape mais robusto no contexto real.
+    }
+
 
     /**
      * Generate the SQL ORDER BY clause for order conditions in the search.

@@ -70,7 +70,7 @@ trait SearchRepository
     }
 
 
-     /**
+    /**
      * Add ORDER BY condition to the search query.
      *
      * @param string $field The field to order by.
@@ -126,6 +126,67 @@ trait SearchRepository
 
         $this->groupFields = $field;
         $this->searchFieldGroup = true;
+        return $this;
+    }
+
+
+    /**
+     * Add OR condition to the search query with different values for each field.
+     *
+     * @param array $fields An array of fields to search on.
+     * @param array $conditions An array of conditions for the search (e.g., '=', '>', '<').
+     * @param array $values An array of values to compare in the search.
+     * @return $this The current instance of the repository with the added OR search condition.
+     */
+    public function searchORWithValues(array $fields, array $conditions, array $values): self
+    {
+        if (count($fields) !== count($conditions) || count($fields) !== count($values)) {
+            return $this;
+        }
+
+        foreach ($fields as $index => $field) {
+            if (empty($values[$index])) {
+                continue;
+            }
+
+            $this->searchFieldsOR[] = [$this->fieldMap[$field]];
+            $this->searchValuesOR[] = $values[$index];
+            $this->searchConditionsOR[] = $conditions[$index];
+        }
+
+        $this->searchOR = true;
+        return $this;
+    }
+
+
+    /**
+     * Clears all values and criteria stored in the instance, allowing the same
+     * instance to be reused for a new query without interference from previous searches.
+     */
+    public function reset(): self
+    {
+        $this->searchFields = [];
+        $this->searchValues = [];
+        $this->searchConditions = [];
+        $this->search = false;
+
+        $this->searchFieldsOR = [];
+        $this->searchValuesOR = [];
+        $this->searchConditionsOR = [];
+        $this->searchOR = false;
+
+        $this->searchFieldOrder = [];
+        $this->sortFieldType = [];
+        $this->searchOrder = false;
+
+        $this->searchType = [];
+        $this->searchBanco = [];
+        $this->searchSimilarField = [];
+        $this->searchSimilarFieldReverse = [];
+        $this->join = false;
+
+        $this->groupFields = [];
+        $this->searchFieldGroup = false;
         return $this;
     }
 }
