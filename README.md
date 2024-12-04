@@ -34,6 +34,7 @@ class testRepository
                 {$this->sqlJoind()} 
                 {$this->sqlSearch()}
                 {$this->sqlSearchOr()}
+                {$this->sqlSearchOrConditions()}
                 {$this->sqlOrderBy()} 
                 {$this->sqlGroupBy()} 
                 {$this->sqlPaginate()}
@@ -63,6 +64,16 @@ Example using serachOr: search for one or more specific fields using the or oper
 $testRepository->searchOR(['number', 'description'], 'like', $searchValue);
 $testRepository->searchOR(['test'], '=', $searchValue);
  ```
+ 
+Example using sqlSearchOrConditions: search condition to the search query with different values for each field.
+```bash
+$testRepository->searchORWithValues(
+    ['idProcess', 'type', 'documentType'],
+    ['like', '=', '>'],
+    ['%example%', 'report', 'Processo']
+)
+ ```
+
 Example of using orderBy
 ```bash
 $testRepository->orderBy('number', 'asc');
@@ -76,4 +87,9 @@ $testRepository->groupBy(['status', 'commission']);
 Example of using join.
 ```bash
 $testRepository->join('INNER', 'commission_table', 'id', 'commission_id');
+```
+
+Example clears all values and criteria stored in the instance, allowing the same instance to be reused for a new query without interference from previous searches.
+```bash
+$testRepository->reset()
 ```
